@@ -19,7 +19,7 @@ const STATE_FILE_NAME = 'telemetry_state.json';
 function getDataFolder(): string {
   const homedir = os.homedir();
   const {env} = process;
-  const name = 'chrome-devtools-mcp';
+  const name = 'chrome-devtools-mcp-continuous';
 
   if (process.platform === 'darwin') {
     return path.join(homedir, 'Library', 'Application Support', name);

@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "chrome-devtools": {
+    "chrome-devtools-continuous": {
       "command": "npx",
-      "args": ["chrome-devtools-mcp@latest"]
+      "args": ["chrome-devtools-mcp-continuous"]
     }
   }
 }

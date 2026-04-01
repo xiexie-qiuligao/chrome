@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-process.title = 'chrome-devtools';
+process.title = 'chrome-devtools-continuous';
 
 import process from 'node:process';
 
@@ -66,11 +66,11 @@ startCliOptions.isolated!.description =
   'If specified, creates a temporary user-data-dir that is automatically cleaned up after the browser is closed. Defaults to true unless userDataDir is provided.';
 
 const y = yargs(hideBin(process.argv))
-  .scriptName('chrome-devtools')
+  .scriptName('chrome-devtools-continuous')
   .showHelpOnFail(true)
-  .usage('chrome-devtools <command> [...args] --flags')
+  .usage('chrome-devtools-continuous <command> [...args] --flags')
   .usage(
-    `Run 'chrome-devtools <command> --help' for help on the specific command.`,
+    `Run 'chrome-devtools-continuous <command> --help' for help on the specific command.`,
   )
   .demandCommand()
   .version(VERSION)
@@ -80,7 +80,7 @@ const y = yargs(hideBin(process.argv))
 
 y.command(
   'start',
-  'Start or restart chrome-devtools-mcp',
+  'Start or restart chrome-devtools-mcp-continuous',
   y =>
     y
       .options(startCliOptions)
@@ -106,9 +106,9 @@ y.command(
   },
 ).strict(); // Re-enable strict validation for other commands; this is applied to the yargs instance itself
 
-y.command('status', 'Checks if chrome-devtools-mcp is running', async () => {
+y.command('status', 'Checks if chrome-devtools-mcp-continuous is running', async () => {
   if (isDaemonRunning()) {
-    console.log('chrome-devtools-mcp daemon is running.');
+    console.log('chrome-devtools-mcp-continuous daemon is running.');
     const response = await sendCommand({
       method: 'status',
     });
@@ -129,12 +129,12 @@ y.command('status', 'Checks if chrome-devtools-mcp is running', async () => {
       process.exit(1);
     }
   } else {
-    console.log('chrome-devtools-mcp daemon is not running.');
+    console.log('chrome-devtools-mcp-continuous daemon is not running.');
   }
   process.exit(0);
 });
 
-y.command('stop', 'Stop chrome-devtools-mcp if any', async () => {
+y.command('stop', 'Stop chrome-devtools-mcp-continuous if any', async () => {
   if (!isDaemonRunning()) {
     process.exit(0);
   }

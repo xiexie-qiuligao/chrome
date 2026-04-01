@@ -28,7 +28,7 @@ describe('chrome-devtools', () => {
       `start command failed: ${result.stderr}`,
     );
     assert(
-      result.stderr.includes('chrome-devtools-mcp exposes content'),
+      result.stderr.includes('chrome-devtools-mcp-continuous exposes content'),
       'Disclaimer not found in stderr on start',
     );
   });

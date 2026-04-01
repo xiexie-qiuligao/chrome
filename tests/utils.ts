@@ -360,14 +360,14 @@ export async function assertDaemonIsNotRunning() {
   const result = await runCli(['status']);
   assert.strictEqual(
     result.stdout,
-    'chrome-devtools-mcp daemon is not running.\n',
+    'chrome-devtools-mcp-continuous daemon is not running.\n',
   );
 }
 
 export async function assertDaemonIsRunning() {
   const result = await runCli(['status']);
   assert.ok(
-    result.stdout.startsWith('chrome-devtools-mcp daemon is running.\n'),
-    'chrome-devtools-mcp daemon is not running',
+    result.stdout.startsWith('chrome-devtools-mcp-continuous daemon is running.\n'),
+    'chrome-devtools-mcp-continuous daemon is not running',
   );
 }
