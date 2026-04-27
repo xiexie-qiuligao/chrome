@@ -595,18 +595,29 @@ export class McpContext implements Context {
       await this.detectOpenDevToolsWindows();
       return this.#pages;
     }
-    if (!force && this.#pageRegistryInitialized && this.#pendingTargetUpdates.size) {
+    if (
+      !force &&
+      this.#pageRegistryInitialized &&
+      this.#pendingTargetUpdates.size
+    ) {
       await this.#applyPendingTargetUpdates();
       this.#pagesSnapshotDirty = false;
       this.#devToolsWindowsDirty = true;
       await this.detectOpenDevToolsWindows();
       return this.#pages;
     }
-    const {pages: allPages, isolatedContextNames, pageTargets} =
-      await this.#getAllPages();
+    const {
+      pages: allPages,
+      isolatedContextNames,
+      pageTargets,
+    } = await this.#getAllPages();
 
     for (const page of allPages) {
-      this.#registerPage(page, isolatedContextNames.get(page), pageTargets.get(page));
+      this.#registerPage(
+        page,
+        isolatedContextNames.get(page),
+        pageTargets.get(page),
+      );
     }
 
     // Prune orphaned #mcpPages entries (pages that no longer exist).

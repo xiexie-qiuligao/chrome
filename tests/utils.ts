@@ -233,7 +233,9 @@ export function stabilizeStructuredContent(content: unknown): unknown {
   if (typeof content === 'object' && content !== null) {
     const result: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(content)) {
-      if (key === 'snapshotFilePath' && typeof value === 'string') {
+      if (key === 'targetId') {
+        continue;
+      } else if (key === 'snapshotFilePath' && typeof value === 'string') {
         result[key] = '<file>';
       } else {
         result[key] = stabilizeStructuredContent(value);
@@ -367,7 +369,9 @@ export async function assertDaemonIsNotRunning() {
 export async function assertDaemonIsRunning() {
   const result = await runCli(['status']);
   assert.ok(
-    result.stdout.startsWith('chrome-devtools-mcp-continuous daemon is running.\n'),
+    result.stdout.startsWith(
+      'chrome-devtools-mcp-continuous daemon is running.\n',
+    ),
     'chrome-devtools-mcp-continuous daemon is not running',
   );
 }

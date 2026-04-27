@@ -148,13 +148,10 @@ describe('McpContext', () => {
       await context.createPagesSnapshot(true);
       const afterForcedRefresh = pagesSpy.callCount;
 
-      context.browser.emit(
-        'targetchanged',
-        {
-          type: () => 'service_worker',
-          url: () => 'https://example.com/sw.js',
-        } as unknown as Target,
-      );
+      context.browser.emit('targetchanged', {
+        type: () => 'service_worker',
+        url: () => 'https://example.com/sw.js',
+      } as unknown as Target);
       await context.refreshBrowserStateIfNeeded();
 
       assert.strictEqual(

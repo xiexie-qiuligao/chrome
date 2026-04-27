@@ -106,33 +106,37 @@ y.command(
   },
 ).strict(); // Re-enable strict validation for other commands; this is applied to the yargs instance itself
 
-y.command('status', 'Checks if chrome-devtools-mcp-continuous is running', async () => {
-  if (isDaemonRunning()) {
-    console.log('chrome-devtools-mcp-continuous daemon is running.');
-    const response = await sendCommand({
-      method: 'status',
-    });
-    if (response.success) {
-      const data = JSON.parse(response.result) as {
-        pid: number | null;
-        socketPath: string;
-        startDate: string;
-        version: string;
-        args: string[];
-      };
-      console.log(
-        `pid=${data.pid} socket=${data.socketPath} start-date=${data.startDate} version=${data.version}`,
-      );
-      console.log(`args=${JSON.stringify(data.args)}`);
+y.command(
+  'status',
+  'Checks if chrome-devtools-mcp-continuous is running',
+  async () => {
+    if (isDaemonRunning()) {
+      console.log('chrome-devtools-mcp-continuous daemon is running.');
+      const response = await sendCommand({
+        method: 'status',
+      });
+      if (response.success) {
+        const data = JSON.parse(response.result) as {
+          pid: number | null;
+          socketPath: string;
+          startDate: string;
+          version: string;
+          args: string[];
+        };
+        console.log(
+          `pid=${data.pid} socket=${data.socketPath} start-date=${data.startDate} version=${data.version}`,
+        );
+        console.log(`args=${JSON.stringify(data.args)}`);
+      } else {
+        console.error('Error:', response.error);
+        process.exit(1);
+      }
     } else {
-      console.error('Error:', response.error);
-      process.exit(1);
+      console.log('chrome-devtools-mcp-continuous daemon is not running.');
     }
-  } else {
-    console.log('chrome-devtools-mcp-continuous daemon is not running.');
-  }
-  process.exit(0);
-});
+    process.exit(0);
+  },
+);
 
 y.command('stop', 'Stop chrome-devtools-mcp-continuous if any', async () => {
   if (!isDaemonRunning()) {
