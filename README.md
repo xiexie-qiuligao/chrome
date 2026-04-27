@@ -67,7 +67,7 @@ chrome-devtools-mcp-continuous
 
 ### 方式一：通过 npm 使用
 
-发布后可直接通过 `npx` 启动：
+已发布到 npm，可直接通过 `npx` 启动：
 
 ```bash
 npx -y chrome-devtools-mcp-continuous
@@ -127,6 +127,24 @@ build/src/bin/chrome-devtools-mcp.js
 
 ## MCP 配置示例
 
+### 使用 npm 包
+
+```json
+{
+  "mcpServers": {
+    "chrome-devtools-continuous": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "chrome-devtools-mcp-continuous",
+        "--browser-url=http://127.0.0.1:9222",
+        "--no-usage-statistics"
+      ]
+    }
+  }
+}
+```
+
 ### 使用本地构建版本
 
 适用于本地直接使用源码构建结果。
@@ -151,25 +169,7 @@ startup_timeout_ms = 30000
 
 请将 `C:\\path\\to\\chrome\\...` 替换为本地实际路径。
 
-### 使用 npm 包
-
-```json
-{
-  "mcpServers": {
-    "chrome-devtools-continuous": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "chrome-devtools-mcp-continuous",
-        "--browser-url=http://127.0.0.1:9222",
-        "--no-usage-statistics"
-      ]
-    }
-  }
-}
-```
-
-## 发布到 npm
+## 维护者：发布到 npm
 
 ### 本地打包验证
 
